@@ -1,0 +1,31 @@
+{
+  "name": "listen-connect",
+  "version": "1.0.0",
+  "description": "listen and connect methods for exposing a duplex stream",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape tests.js"
+  },
+  "author": "Tim <tim.hudson15@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "tape": "^3.0.3"
+  },
+  "dependencies": {
+    "parse-connection-args": "^1.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/timhudson/listen-connect.git"
+  },
+  "keywords": [
+    "duplex",
+    "listen",
+    "connect",
+    "net"
+  ],
+  "bugs": {
+    "url": "https://github.com/timhudson/listen-connect/issues"
+  },
+  "homepage": "https://github.com/timhudson/listen-connect"
+}
