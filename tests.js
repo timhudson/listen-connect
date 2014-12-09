@@ -24,7 +24,7 @@ test('listen-connect', function(t) {
 
       client.destroy()
       server.close()
-    })
+    }, 10)
   })
 })
 
