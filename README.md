@@ -4,6 +4,8 @@ listen and connect methods for exposing a duplex stream to the network
 
 [![build status](http://img.shields.io/travis/timhudson/listen-connect.svg?style=flat)](http://travis-ci.org/timhudson/listen-connect)
 
+This was extracted from [dnode](https://www.npmjs.org/package/dnode)
+
 ## Example
 
 ``` js
