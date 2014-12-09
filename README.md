@@ -1,6 +1,6 @@
 # listen-connect
 
-listen and connect methods for exposing a duplex stream
+listen and connect methods for exposing a duplex stream to the network
 
 [![build status](http://img.shields.io/travis/timhudson/listen-connect.svg?style=flat)](http://travis-ci.org/timhudson/listen-connect)
 

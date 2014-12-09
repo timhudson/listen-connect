@@ -1,7 +1,7 @@
 {
   "name": "listen-connect",
   "version": "1.0.0",
-  "description": "listen and connect methods for exposing a duplex stream",
+  "description": "listen and connect methods for exposing a duplex stream to the network",
   "main": "index.js",
   "scripts": {
     "test": "tape tests.js"
