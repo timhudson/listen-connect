@@ -11,6 +11,8 @@ module.exports.createListen = function(stream) {
       netStream.pipe(stream).pipe(netStream)
     })
 
+    stream.close = server.close.bind(server)
+
     if (typeof params.port === 'number' && params.port >= 0) {
       server.listen(params.port, params.host)
     }
@@ -49,6 +51,13 @@ module.exports.createConnect = function(stream) {
       if (err && err.code === 'EPIPE') return // eat EPIPEs
       stream.emit('error', err)
     })
+
+    var destroy = stream.destroy
+
+    stream.destroy = function() {
+      destroy.apply(stream, arguments)
+      client.destroy()
+    }
 
     client.pipe(stream)
     stream.pipe(client)
