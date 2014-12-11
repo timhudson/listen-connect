@@ -3,8 +3,13 @@
 var net = require('net')
 var parseArgs = require('parse-connection-args')
 
-module.exports.createListen = function(stream) {
+module.exports.createListen = function(createStream) {
+  if (typeof createStream !== 'function') {
+    throw new Error('Must provide a function that returns a stream instance')
+  }
+
   return function() {
+    var stream = createStream()
     var params = parseArgs(arguments)
 
     var server = net.createServer(function(netStream) {
@@ -29,8 +34,13 @@ module.exports.createListen = function(stream) {
   }
 }
 
-module.exports.createConnect = function(stream) {
+module.exports.createConnect = function(createStream) {
+  if (typeof createStream !== 'function') {
+    throw new Error('Must provide a function that returns a stream instance')
+  }
+
   return function() {
+    var stream = createStream()
     var params = parseArgs(arguments)
 
     var client

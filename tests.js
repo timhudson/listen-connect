@@ -4,15 +4,22 @@ var through = require('through2')
 var listenConnect = require('./')
 
 test('listen-connect', function(t) {
-  t.plan(4)
+  t.plan(6)
 
-  var server = duplexCache()
-  server.listen = listenConnect.createListen(server)
-  server.listen(4000)
+  var server, client
 
-  var client = duplexCache()
-  client.connect = listenConnect.createConnect(client)
-  client.connect(4000, function() {
+  var listen = listenConnect.createListen(function() {
+    t.ok(true, 'initialized listen stream')
+    return server = duplexCache()
+  })
+
+  var connect = listenConnect.createConnect(function() {
+    t.ok(true, 'initialized connect stream')
+    return client = duplexCache()
+  })
+
+  listen(4000)
+  connect(4000, function() {
     client.send('ZOK!')
     server.send('THWACKE!')
 
