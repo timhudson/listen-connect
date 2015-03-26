@@ -6,28 +6,28 @@ var listenConnect = require('./')
 test('listen-connect', function(t) {
   t.plan(6)
 
-  var server, client
+  var serverStream, clientStream
 
   var listen = listenConnect.createListen(function() {
     t.ok(true, 'initialized listen stream')
-    return server = duplexCache()
+    return serverStream = duplexCache()
   })
 
   var connect = listenConnect.createConnect(function() {
     t.ok(true, 'initialized connect stream')
-    return client = duplexCache()
+    return clientStream = duplexCache()
   })
 
-  listen(4000)
-  connect(4000, function() {
-    client.send('ZOK!')
-    server.send('THWACKE!')
+  var server = listen(4000)
+  var client = connect(4000, function() {
+    clientStream.send('ZOK!')
+    serverStream.send('THWACKE!')
 
     setTimeout(function() {
-      t.equal(client.reads[0], 'ZOK!')
-      t.equal(server.writes[0], 'ZOK!')
-      t.equal(server.reads[0], 'THWACKE!')
-      t.equal(client.writes[0], 'THWACKE!')
+      t.equal(clientStream.reads[0], 'ZOK!')
+      t.equal(serverStream.writes[0], 'ZOK!')
+      t.equal(serverStream.reads[0], 'THWACKE!')
+      t.equal(clientStream.writes[0], 'THWACKE!')
 
       client.destroy()
       server.close()

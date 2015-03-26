@@ -5,18 +5,15 @@ var parseArgs = require('parse-connection-args')
 
 module.exports.createListen = function(createStream) {
   if (typeof createStream !== 'function') {
-    throw new Error('Must provide a function that returns a stream instance')
+    throw new Error('Must provide a function that returns a duplex stream')
   }
 
   return function() {
-    var stream = createStream()
     var params = parseArgs(arguments)
 
     var server = net.createServer(function(netStream) {
-      netStream.pipe(stream).pipe(netStream)
+      netStream.pipe(createStream()).pipe(netStream)
     })
-
-    stream.close = server.close.bind(server)
 
     if (typeof params.port === 'number' && params.port >= 0) {
       server.listen(params.port, params.host)
